@@ -1,0 +1,345 @@
+// ---------------------------------------------------------------------------
+// POMPUI dark theme overrides (GitMinIT/peer-calls fork)
+// Visual-only theme matching the pompui.de landing page: near-black green
+// background with soft radial glows, glassy surfaces, #9bea75 accent.
+// Imported last in style.sass so these win the cascade. Component partials
+// are imported inside `.app` in style.sass, so the overrides for them are
+// nested under `.app` too — otherwise the originals would win on specificity.
+// ---------------------------------------------------------------------------
+
+::selection
+  background: rgba(155, 234, 117, 0.35)
+
+body
+  background-image: radial-gradient(60rem 40rem at 12% -10%, rgba(155, 234, 117, 0.10), transparent 60%), radial-gradient(52rem 38rem at 108% 112%, rgba(62, 198, 184, 0.09), transparent 62%)
+  background-attachment: fixed
+
+// white logo watermark, faint on the dark background
+body.call
+  background-image: none
+
+  &::before
+    content: ""
+    position: fixed
+    inset: 0
+    background: url("../res/peer-calls.svg") 50% 50% / 200px no-repeat
+    opacity: 0.07
+    pointer-events: none
+    z-index: 0
+
+.app
+  position: relative
+  z-index: 1
+
+// classic black "fork me" ribbon is invisible on dark — invert it
+#github-ribbon img
+  filter: invert(1)
+
+footer
+  color: $color-fg
+
+// --- home page: room form as a glass card (home page has no .app wrapper) ---
+#form
+  margin-top: 9vh
+  padding: 2rem 1.75rem
+  background: rgba(9, 20, 17, 0.66)
+  border: 1px solid rgba(234, 248, 240, 0.16)
+  border-radius: 16px
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45)
+  backdrop-filter: blur(12px)
+
+  p
+    color: $color-fg
+
+  input[type="text"]
+    background: rgba(5, 12, 10, 0.6)
+    border: 1px solid rgba(234, 248, 240, 0.16)
+    border-radius: 10px
+    color: $color-text
+
+    &:focus
+      border-color: #9bea75
+      border-bottom: 2px solid #9bea75
+
+  label[for="call"]
+    color: $color-fg
+
+  input[type="submit"]
+    background: #9bea75
+    border-bottom: 2px solid #184c36
+    color: #0b1f14
+    text-shadow: none
+    border-radius: 10px
+
+    &:hover
+      background: #aaf28b
+
+// --- everything below lives inside .app on the call page ---
+.app
+
+  // --- join-call media dialog ---
+  .media-container form.media
+    background: rgba(9, 20, 17, 0.7)
+    border: 1px solid rgba(234, 248, 240, 0.16)
+    border-radius: 16px
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5)
+    backdrop-filter: blur(12px)
+    padding: 2rem 1.5rem
+    margin-top: 5vh
+
+    .form-item video
+      background-color: rgba(0, 0, 0, 0.5)
+      border: 1px solid rgba(234, 248, 240, 0.12)
+      border-radius: 12px
+
+    label
+      color: #ff8a3d
+
+    select, input
+      background-color: rgba(5, 12, 10, 0.7)
+      color: $color-text
+      border-bottom: 2px solid rgba(234, 248, 240, 0.25)
+      border-radius: 8px
+
+    input.error
+      border: 2px solid #ff8a3d
+
+    select
+      &:hover
+        background-color: rgba(14, 28, 24, 0.9)
+
+      &:active
+        background-color: rgba(24, 76, 54, 0.9)
+
+    button
+      background: #9bea75
+      border-bottom: 2px solid #184c36
+      color: #0b1f14
+      text-shadow: none
+      border-radius: 10px
+
+      &:hover
+        background: #aaf28b
+
+    a.button-abort
+      background: #dd2c00
+      border-bottom-color: #8f1d00
+      color: #fff
+
+      &:hover
+        background: #f03e12
+
+    .network-info
+      color: $color-fg
+      text-shadow: none
+
+  // --- toolbar ---
+  .toolbar
+    .icon
+      background-color: rgba(9, 20, 17, 0.78)
+      border: 1px solid rgba(234, 248, 240, 0.16)
+      color: $color-text
+
+    .buttons-row
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55)
+
+    .button
+      &:hover .icon
+        background-color: #9bea75
+        color: #0b1f14
+        box-shadow: 0 4px 24px rgba(155, 234, 117, 0.35)
+
+      &.on .icon
+        background: #9bea75
+        color: #0b1f14
+
+      &.hangup .icon
+        background-color: #dd2c00
+
+      &.hangup:hover .icon
+        background-color: #f03e12
+
+    .tooltip
+      color: $color-text
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9)
+
+    .dropdown-list::after
+      border-top-color: rgba(14, 28, 24, 0.97)
+
+    .encryption-dialog
+      background: rgba(9, 20, 17, 0.95)
+      border-color: rgba(234, 248, 240, 0.16)
+      border-radius: 10px
+
+      input
+        background-color: rgba(5, 12, 10, 0.8)
+        color: $color-text
+        border-bottom-color: rgba(234, 248, 240, 0.25)
+
+      input[type="submit"], button
+        background: #9bea75
+        color: #0b1f14
+        text-shadow: none
+        border-bottom-color: #184c36
+
+      .note
+        color: #9bea75
+
+  // --- sidebar (chat / users / settings) ---
+  .sidebar
+    background-color: rgba(9, 20, 17, 0.88)
+    backdrop-filter: blur(16px)
+    border-left: 1px solid rgba(234, 248, 240, 0.14)
+    color: $color-text
+
+    &.show
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55)
+
+  .sidebar-header
+    background: rgba(24, 76, 54, 0.6)
+
+    .sidebar-menu
+      color: $color-fg
+
+      li.active
+        color: #9bea75
+
+        &::after
+          background-color: #9bea75
+
+  // --- chat ---
+  .chat-history .chat-empty
+    color: $color-fg
+
+  .chat-item
+    .chat-item-img
+      color: $color-fg
+
+    .message
+      background: rgba(14, 28, 24, 0.9)
+      border-radius: 12px
+
+      div
+        color: $color-fg
+
+      .message-user-name
+        color: #9bea75
+
+      .icon:before
+        color: $color-fg
+
+      .message-time
+        color: $color-fg
+
+      .message-text
+        color: $color-text
+
+      .message-download
+        background-color: #9bea75
+        color: #0b1f14
+
+    &.chat-item-me .message
+      background: rgba(155, 234, 117, 0.16)
+
+      &::after
+        border-left-color: rgba(155, 234, 117, 0.16)
+
+    &.chat-item-other .message::before
+      border-right-color: rgba(14, 28, 24, 0.9)
+
+  .chat-controls
+    background-color: rgba(9, 20, 17, 0.9)
+    border-top: 1px solid rgba(234, 248, 240, 0.14)
+
+    .chat-controls-textarea
+      background: rgba(5, 12, 10, 0.6)
+      border: 1px solid rgba(234, 248, 240, 0.14)
+      border-radius: 10px
+      color: $color-text
+
+    .chat-controls-buttons-send,
+    .chat-controls-buttons-send-file
+      background: #9bea75
+      color: #0b1f14
+      border-radius: 8px
+
+    .emoji .icon
+      color: $color-fg
+
+    .chat-controls-buttons-smiles-menu
+      background-color: rgba(14, 28, 24, 0.97)
+      border: 1px solid rgba(234, 248, 240, 0.14)
+      border-radius: 10px
+
+  // --- users / settings lists ---
+  .users, .settings
+    li
+      border-bottom: 1px solid rgba(234, 248, 240, 0.08)
+      color: $color-text
+
+      .settings-description
+        color: $color-fg
+
+  // --- video grid ---
+  .video-container
+    background-color: rgba(0, 0, 0, 0.45)
+    border: 1px solid rgba(234, 248, 240, 0.12)
+    border-radius: 12px
+    overflow: hidden
+
+  // --- alerts / popups / errors ---
+  .alert
+    color: #9bea75
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9)
+
+    button
+      background: #9bea75
+      color: #0b1f14
+      text-shadow: none
+      border-bottom-color: #184c36
+      border-radius: 10px
+
+  .popup-overlay
+    background: rgba(2, 5, 4, 0.75)
+
+  .popup-window .popup-content
+    background-color: rgba(9, 20, 17, 0.97)
+    border: 1px solid rgba(234, 248, 240, 0.16)
+    border-radius: 16px
+    color: $color-text
+
+  .message-error
+    background-color: rgba(238, 118, 0, 0.22)
+    border: 1px solid rgba(255, 138, 61, 0.5)
+    border-radius: 10px
+    color: #ffd9bd
+    text-shadow: none
+
+    a
+      color: #9bea75
+
+// dropdown partial itself is imported at top level in style.sass
+.dropdown button
+  color: $color-text
+
+.dropdown-list
+  border: 1px solid rgba(234, 248, 240, 0.16)
+  border-radius: 10px
+  overflow: hidden
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55)
+
+  li
+    background-color: rgba(14, 28, 24, 0.97)
+    color: $color-text
+
+    &:hover
+      background-color: rgba(155, 234, 117, 0.18)
+
+    & + li
+      border-top: 1px solid rgba(234, 248, 240, 0.08)
+
+@keyframes bg-blink
+  50%
+    background-color: #9bea75
+  99%
+    background-color: #9bea75
